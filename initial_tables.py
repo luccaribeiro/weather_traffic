@@ -1,5 +1,5 @@
 from sqlalchemy.orm import declarative_base
-from sqlalchemy import Column, Integer, String, Float, DateTime, create_engine
+from sqlalchemy import Column, Integer, String, Float, DateTime, create_engine, JSON
 
 engine = create_engine('sqlite:///zebrinha_azul.db', echo=True)
 Base = declarative_base()
@@ -40,4 +40,32 @@ class Weather(Base):
     weather_description = Column(String)
     weather_icon = Column(String)
     
+class Traffic(Base):
+    __tablename__ = 'traffic'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    polyline_overview = Column(JSON)
+    route_summary = Column(String)
+    warnings = Column(JSON)
+    waypoint_order = Column(JSON)
+    origin = Column(String)
+    destiny = Column(String)
+    northeast_bounds_latitude = Column(Float)
+    northeast_bounds_longitude = Column(Float)
+    southwest_bounds_latitude = Column(Float)
+    southwest_bounds_longitude = Column(Float)
+    end_address = Column(String)
+    start_address = Column(String)
+    route_steps = Column(JSON)
+    traffic_speed_entry = Column(JSON)
+    via_waypoints = Column(JSON)
+    distance_text = Column(String)
+    distance_value = Column(Integer)
+    duration_text = Column(String)
+    duration_value = Column(Integer)
+    end_location_latitude = Column(Float)
+    end_location_longitude = Column(Float)
+    start_location_latitude = Column(Float)
+    start_location_longitude = Column(Float)
+    date = Column(DateTime)
+
 Base.metadata.create_all(engine)
