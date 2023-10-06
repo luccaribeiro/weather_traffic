@@ -1,5 +1,6 @@
-import json 
+import json
 import pandas as pd
+
 
 def save_raw_data(raw_data, date, name):
     raw_data_json = json.dumps(raw_data)
@@ -11,6 +12,7 @@ def save_raw_data(raw_data, date, name):
     # Coloquei para salvar localmente pois não queria que dependesse de uma conta AWS
     # Porém normalmente esse arquivo estaria em um bucket no s3
 
+
 def read_weather_data(file_name):
     # Aqui seria o codigo de leitura no S3 ao inves de ler localmente
     try:
@@ -21,9 +23,12 @@ def read_weather_data(file_name):
         print(f"O arquivo '{file_name}' não foi encontrado.")
         return None
     except json.JSONDecodeError:
-        print(f"Erro ao decodificar o arquivo JSON em '{file_name}'. Verifique a formatação.")
+        print(
+            f"Erro ao decodificar o arquivo JSON em '{file_name}'. Verifique a formatação."
+        )
         return None
-    
+
+
 def normalize_dict_columns(df, dict_columns, prefix=False):
     for col_name in dict_columns:
         # Extrai o dicionário

@@ -6,7 +6,7 @@ import pendulum
 from dags.etl_weather.tasks import (
     extract_weather_data,
     treatment_wheater_data,
-    df_to_db
+    df_to_db,
 )
 
 

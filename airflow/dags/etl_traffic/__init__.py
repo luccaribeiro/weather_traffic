@@ -7,7 +7,7 @@ import pendulum
 from dags.etl_traffic.tasks import (
     extract_traffic_data,
     treatment_traffic_data,
-    df_to_db
+    df_to_db,
 )
 
 
