@@ -1,0 +1,43 @@
+from sqlalchemy.orm import declarative_base
+from sqlalchemy import Column, Integer, String, Float, DateTime, create_engine
+
+engine = create_engine('sqlite:///zebrinha_azul.db', echo=True)
+Base = declarative_base()
+
+class Weather(Base):
+    __tablename__ = 'weather'
+    id = Column(Integer, primary_key=True,autoincrement=True)
+    timestamp = Column(DateTime)
+    cloud_coverage = Column(Integer)
+    visibility = Column(Integer)
+    probability_of_precipitation = Column(Float)
+    rain_info = Column(Float)
+    time_of_day = Column(String)
+    date = Column(String)
+    temperature = Column(Float)
+    feels_like_temperature = Column(Float)
+    min_temperature = Column(Float)
+    max_temperature = Column(Float)
+    pressure = Column(Integer)
+    sea_level_pressure = Column(Integer)
+    ground_level_pressure = Column(Integer)
+    humidity = Column(Integer)
+    temperature_kf = Column(Float)
+    wind_speed = Column(Float)
+    wind_direction_deg = Column(Integer)
+    wind_gust_speed = Column(Float)
+    city_id = Column(Integer)
+    city_name = Column(String)
+    city_country = Column(String)
+    city_population = Column(Integer)
+    city_timezone = Column(Integer)
+    city_sunrise = Column(Integer)
+    city_sunset = Column(Integer)
+    city_latitude = Column(Float)
+    city_longitude = Column(Float)
+    weather_id = Column(Integer)
+    weather_main = Column(String)
+    weather_description = Column(String)
+    weather_icon = Column(String)
+    
+Base.metadata.create_all(engine)
