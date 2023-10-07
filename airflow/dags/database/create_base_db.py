@@ -1,26 +1,13 @@
 from airflow import DAG
-from airflow.operators.empty import EmptyOperator
-from airflow.operators.python import PythonOperator
-from airflow.utils.dates import timedelta
-import pendulum
+from airflow.decorators import task
 from sqlalchemy.orm import declarative_base
 from sqlalchemy import Column, Integer, String, Float, DateTime, create_engine, JSON, ForeignKey
+from airflow import DAG
+from airflow.decorators import dag
+from airflow.utils.dates import timedelta
+import pendulum
 
-
-dag_name = "database.init_config"
-schd = None
-tags = ["database"]
-
-args = {
-    "owner": "lucca.ribeiro",
-    "start_date": pendulum.today("UTC").add(days=-7, minutes=-60),
-    "max_active_runs": 1,
-    "retries": 1,
-    "retry_delay": timedelta(minutes=30),
-    "dagrun_timeout": timedelta(minutes=300),
-}
-
-
+@task
 def create_database():
     engine = create_engine("sqlite:///zebrinha_azul.db", echo=True)
     Base = declarative_base()
@@ -92,15 +79,26 @@ def create_database():
     Base.metadata.create_all(engine)
 
 
-# Dag
-with DAG(dag_name, default_args=args, schedule=schd, tags=tags) as dag:
-    ini_dag = EmptyOperator(task_id="initialize", dag=dag)
+args = {
+    "owner": "lucca.ribeiro",
+    "start_date": pendulum.today("UTC").add(days=-7, minutes=-60),
+    "max_active_runs": 1,
+    "retries": 1,
+    "retry_delay": timedelta(minutes=30),
+    "dagrun_timeout": timedelta(minutes=300),
+}
 
-    initial_database = PythonOperator(
-        task_id="initial_database",
-        python_callable=create_database,
-    )
 
-    end_dag = EmptyOperator(task_id="finished", dag=dag)
+@dag(
+    dag_id="database.inital_config",
+    default_args=args,
+    schedule=None,
+    tags=["database"],
+)
+def taskflow():
+    initial_database = create_database()
 
-ini_dag >> initial_database >> end_dag
+    (initial_database)
+
+
+dag: DAG = taskflow()
