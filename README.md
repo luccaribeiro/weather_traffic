@@ -1,6 +1,13 @@
 # Weather Traffic
 
 # Documentação do Projeto
+Criei uma documentação detalhada que explica todas as decisões que tomei ao longo deste projeto.
+
+Para conferir todos os detalhes e entender o motivo por trás de cada decisão que tomei, você pode acessar o seguinte link para o Notion:
+
+[Documentação do Projeto no Notion](https://east-canopy-5bc.notion.site/Projeto-Weather-Traffic-87b817a2047b48cabd280e9a522c3fc8)
+
+Além disso, para sua conveniência, também disponibilizei um arquivo chamado documentation.odt no repositório do projeto, que contém o mesmo conteúdo. Você pode acessá-lo caso o site do Notion esteja temporariamente indisponível.
 
 # Setup
 Este projeto utiliza o Apache Airflow para orquestrar as tarefas ETL. Para configurar o ambiente do Airflow e executar este projeto, siga as instruções na [documentação oficial do Apache Airflow](https://airflow.apache.org/docs/apache-airflow/stable/installation/index.html).
