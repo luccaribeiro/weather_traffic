@@ -1,11 +1,21 @@
 from airflow import DAG
 from airflow.decorators import task
 from sqlalchemy.orm import declarative_base
-from sqlalchemy import Column, Integer, String, Float, DateTime, create_engine, JSON, ForeignKey
+from sqlalchemy import (
+    Column,
+    Integer,
+    String,
+    Float,
+    DateTime,
+    create_engine,
+    JSON,
+    ForeignKey,
+)
 from airflow import DAG
 from airflow.decorators import dag
 from airflow.utils.dates import timedelta
 import pendulum
+
 
 @task
 def create_database():
@@ -55,8 +65,8 @@ def create_database():
         route_summary = Column(String)
         warnings = Column(JSON)
         waypoint_order = Column(JSON)
-        origin = Column(String, ForeignKey('weather.city_name'))
-        destiny = Column(String, ForeignKey('weather.city_name'))
+        origin = Column(String, ForeignKey("weather.city_name"))
+        destiny = Column(String, ForeignKey("weather.city_name"))
         northeast_bounds_latitude = Column(Float)
         northeast_bounds_longitude = Column(Float)
         southwest_bounds_latitude = Column(Float)
