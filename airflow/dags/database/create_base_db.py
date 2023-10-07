@@ -4,7 +4,7 @@ from airflow.operators.python import PythonOperator
 from airflow.utils.dates import timedelta
 import pendulum
 from sqlalchemy.orm import declarative_base
-from sqlalchemy import Column, Integer, String, Float, DateTime, create_engine, JSON
+from sqlalchemy import Column, Integer, String, Float, DateTime, create_engine, JSON, ForeignKey
 
 
 dag_name = "database.init_config"
@@ -68,8 +68,8 @@ def create_database():
         route_summary = Column(String)
         warnings = Column(JSON)
         waypoint_order = Column(JSON)
-        origin = Column(String)
-        destiny = Column(String)
+        origin = Column(String, ForeignKey('weather.city_name'))
+        destiny = Column(String, ForeignKey('weather.city_name'))
         northeast_bounds_latitude = Column(Float)
         northeast_bounds_longitude = Column(Float)
         southwest_bounds_latitude = Column(Float)
