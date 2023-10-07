@@ -2,7 +2,7 @@ from airflow.decorators import task
 from airflow.models import Variable
 from airflow.exceptions import AirflowFailException
 import requests
-from dags.commons.utils import save_raw_data, read_weather_data, normalize_dict_columns
+from dags.commons.utils import save_raw_data, read_data, normalize_dict_columns
 from datetime import datetime
 from sqlalchemy import create_engine, types
 import pandas as pd
@@ -37,7 +37,7 @@ def extract_traffic_data():
 
 @task
 def treatment_traffic_data():
-    data = read_weather_data(f"raw_traffic_data-{today}.json")
+    data = read_data(f"raw_traffic_data-{today}.json")
     if data is None:
         return None
 

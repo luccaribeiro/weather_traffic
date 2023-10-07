@@ -13,7 +13,7 @@ def save_raw_data(raw_data, date, name):
     # Porém normalmente esse arquivo estaria em um bucket no s3
 
 
-def read_weather_data(file_name):
+def read_data(file_name):
     # Aqui seria o codigo de leitura no S3 ao inves de ler localmente
     try:
         with open(file_name, "r") as raw_data:

@@ -5,7 +5,7 @@ from datetime import datetime
 from airflow.exceptions import AirflowFailException
 import pandas as pd
 from sqlalchemy import create_engine
-from dags.commons.utils import save_raw_data, read_weather_data, normalize_dict_columns
+from dags.commons.utils import save_raw_data, read_data, normalize_dict_columns
 
 
 today = datetime.today().strftime("%Y-%m-%d")
@@ -36,7 +36,7 @@ def extract_weather_data():
 
 @task
 def treatment_wheater_data():
-    data = read_weather_data(f"raw_weather_data-{today}.json")
+    data = read_data(f"raw_weather_data-{today}.json")
 
     if data is None:
         return None
